@@ -1,0 +1,1 @@
+export const LOAD_POPULAR = 'LOAD_POPULAR';
