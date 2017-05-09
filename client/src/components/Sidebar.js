@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as apiActions from '../actions/api'
+import * as playbackActions from '../actions/playback'
+import SketchBinItem from './SketchBinItem'
 
 class Sidebar extends Component {
   constructor(props) {
@@ -13,7 +15,7 @@ class Sidebar extends Component {
         <button onClick={this.props.onClickLoad}>Load Popular</button>
         <div>
           {this.props.sketches.map(sketch => 
-            <div key={sketch.id}>{sketch.name}</div>
+            <SketchBinItem onClick={this.props.onClickThumb} key={sketch.id} sketch={sketch} />
           )}
         </div>
       </div>
@@ -24,14 +26,18 @@ class Sidebar extends Component {
 const mapStateToProps = (state, props) => {
   console.log("New state", state.api.popular)
   return {
-    sketches: state.api.popular || []
+    sketches: state.api.sketches || []
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onClickLoad: () => {
-      dispatch(apiActions.loadPopular())
+      dispatch(apiActions.fetchPopular())
+    },
+    onClickThumb: (sketch) => {
+      console.log(sketch)
+      dispatch(playbackActions.playSketch(sketch))
     }
   }
 }
