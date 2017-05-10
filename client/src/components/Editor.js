@@ -6,6 +6,7 @@ import CodeMirror from 'codemirror';
 var className = require('classnames');
 import {connect} from 'react-redux';
 import * as editorStateActions from '../actions/editor-state'
+import * as playbackActions from '../actions/playback'
 import ShaderPicker from './ShaderPicker'
 
 // var debounce = require('lodash.debounce');
@@ -86,7 +87,7 @@ class Editor extends Component {
   
 	codemirrorValueChanged(doc, change) {
 		if (this.props.onChange && change.origin !== 'setValue') {
-			this.props.onChange(doc.getValue(), change);
+			this.props.onChange(this.props.selectedTab, doc.getValue(), change);
 		}
 	}
   
@@ -128,6 +129,7 @@ const mapStateToProps = (state, props) => {
     }
   }
   return {
+		selectedTab: state.editor.selectedTab,
     value: src
   }
 }
@@ -137,8 +139,8 @@ const mapDispatchToProps = (dispatch) => {
     onSwitchShader: () => {
       dispatch(editorStateActions.switchShader())
     },
-    onChange: () => {
-      // dispatch(apiActions.fetchPopular())
+    onChange: (type, value) => {
+      dispatch(playbackActions.updateSource(type, value))
     }
   }
 }

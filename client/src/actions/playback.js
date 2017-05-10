@@ -12,3 +12,14 @@ export const newSketch = () => {
     type: NEW_SKETCH
   }
 }
+
+export const UPDATE_SOURCE = "UPDATE_SOURCE"
+export const updateSource = (shaderType, src) => {
+  return {
+    type: UPDATE_SOURCE,
+    shaderType,
+    src
+  }
+}
+
+
