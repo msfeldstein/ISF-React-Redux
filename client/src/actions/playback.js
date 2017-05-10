@@ -5,3 +5,10 @@ export const playSketch = (sketch) => {
     sketch: sketch
   }
 }
+
+export const NEW_SKETCH = "NEW_SKETCH"
+export const newSketch = () => {
+  return {
+    type: NEW_SKETCH
+  }
+}

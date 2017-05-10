@@ -33,6 +33,9 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onClickNew: () => {
+      dispatch(playbackActions.newSketch())
+    },
     onClickLoad: () => {
       dispatch(apiActions.fetchPopular())
     },
