@@ -7,6 +7,8 @@ import configureStore from './store/configure-store';
 import App from './components/App';
 import './index.css';
 
+import {newSketch} from './actions/playback'
+
 const store = configureStore();
 
 ReactDOM.render(
@@ -15,3 +17,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+store.dispatch(newSketch())
