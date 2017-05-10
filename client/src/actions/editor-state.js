@@ -8,7 +8,6 @@ export const switchShader = (selectedTab) => {
   }
 }
 export const setShaderType = (shader) => {
-  console.log("Action sets to ", shader)
   return {
     type: SET_SHADER_TYPE,
     selectedTab: shader

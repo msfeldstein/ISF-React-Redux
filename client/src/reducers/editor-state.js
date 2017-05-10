@@ -14,7 +14,6 @@ export default (state = {selectedTab: SHOW_FRAGMENT_SHADER}, action) => {
         selectedTab: next
       })
     case SET_SHADER_TYPE:
-      console.log("I'm trying to set shader type", action.selectedTab)
       return Object.assign({}, state, {
         selectedTab: action.selectedTab
       })

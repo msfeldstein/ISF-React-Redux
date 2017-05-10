@@ -30,7 +30,7 @@ class Editor extends Component {
   
 	componentDidMount() {
 		var textareaNode = ReactDOM.findDOMNode(this.refs.textarea);
-		this.codeMirror = CodeMirror.fromTextArea(textareaNode, {mode: 'glsl'});
+		this.codeMirror = CodeMirror.fromTextArea(textareaNode, {mode: 'glsl', lineWrapping: true});
 		this.codeMirror.on('change', this.codemirrorValueChanged.bind(this));
 		this.codeMirror.on('focus', this.focusChanged.bind(this, true));
 		this.codeMirror.on('blur', this.focusChanged.bind(this, false));

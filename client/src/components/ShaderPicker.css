@@ -1,0 +1,8 @@
+.ShaderPicker button {
+  background: transparent;
+  color: gray;
+}
+
+.ShaderPicker button.active {
+  color: white;
+}

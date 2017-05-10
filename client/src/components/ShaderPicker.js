@@ -5,13 +5,15 @@ import {
   SHOW_FRAGMENT_SHADER
 } from '../actions/editor-state'
 import * as editorStateActions from '../actions/editor-state'
+import classnames from 'classnames'
+import './ShaderPicker.css'
 
 class ShaderPicker extends Component {
   render() {
     return (
       <div className="ShaderPicker" ref='wrapper'>
-        <span onClick={()=> this.props.onSwitchShader(SHOW_VERTEX_SHADER)}>Vertex Shader</span>
-        <span onClick={()=> this.props.onSwitchShader(SHOW_FRAGMENT_SHADER)}>Fragment Shader</span>
+        <button className={classnames({active: this.props.selectedTab == SHOW_FRAGMENT_SHADER})} onClick={()=> this.props.onSwitchShader(SHOW_FRAGMENT_SHADER)}>Fragment Shader</button>
+        <button className={classnames({active: this.props.selectedTab == SHOW_VERTEX_SHADER})} onClick={()=> this.props.onSwitchShader(SHOW_VERTEX_SHADER)}>Vertex Shader</button>
       </div>
     );
   }
