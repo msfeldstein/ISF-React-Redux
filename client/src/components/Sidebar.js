@@ -25,7 +25,6 @@ class Sidebar extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  console.log("New state", state.api.popular)
   return {
     sketches: state.api.sketches || []
   }
@@ -40,7 +39,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(apiActions.fetchPopular())
     },
     onClickThumb: (sketch) => {
-      console.log(sketch)
       dispatch(playbackActions.playSketch(sketch))
     }
   }

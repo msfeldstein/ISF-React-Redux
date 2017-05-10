@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import 'codemirror/lib/codemirror.css';
-import '../glsl.mode.js'
-import ReactDOM from 'react-dom'
+import '../glsl.mode.js';
+import ReactDOM from 'react-dom';
 import CodeMirror from 'codemirror';
 var className = require('classnames');
 import {connect} from 'react-redux';
@@ -103,16 +104,16 @@ class Editor extends Component {
 }
 
 Editor.propTypes = {
-  className: React.PropTypes.any,
-  codeMirrorInstance: React.PropTypes.func,
-  defaultValue: React.PropTypes.string,
-  onChange: React.PropTypes.func,
-  onFocusChange: React.PropTypes.func,
-  onScroll: React.PropTypes.func,
-  options: React.PropTypes.object,
-  path: React.PropTypes.string,
-  value: React.PropTypes.string,
-  preserveScrollPosition: React.PropTypes.bool
+  className: PropTypes.any,
+  codeMirrorInstance: PropTypes.func,
+  defaultValue: PropTypes.string,
+  onChange: PropTypes.func,
+  onFocusChange: PropTypes.func,
+  onScroll: PropTypes.func,
+  options: PropTypes.object,
+  path: PropTypes.string,
+  value: PropTypes.string,
+  preserveScrollPosition: PropTypes.bool
 };
 
 Editor.defaultProps = {
