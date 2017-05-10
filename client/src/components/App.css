@@ -23,12 +23,15 @@ body, html {
 .MainSection {
   flex-grow: 1;
   height: 100%;
+  width: 100%;
   background: black;
   color: white;
 }
 
 .Editor {
   height: 50%;
+  width: 100%;
+  position: relative;
 }
 .Renderer {
   height: 50%;
