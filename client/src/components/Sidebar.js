@@ -12,6 +12,7 @@ class Sidebar extends Component {
   render() {
     return (
       <div className="Sidebar">
+        <button onClick={this.props.onClickNew}>New Shader</button>
         <button onClick={this.props.onClickLoad}>Load Popular</button>
         <div>
           {this.props.sketches.map(sketch => 

@@ -12,8 +12,8 @@ class ShaderPicker extends Component {
   render() {
     return (
       <div className="ShaderPicker" ref='wrapper'>
-        <button className={classnames({active: this.props.selectedTab == SHOW_FRAGMENT_SHADER})} onClick={()=> this.props.onSwitchShader(SHOW_FRAGMENT_SHADER)}>Fragment Shader</button>
-        <button className={classnames({active: this.props.selectedTab == SHOW_VERTEX_SHADER})} onClick={()=> this.props.onSwitchShader(SHOW_VERTEX_SHADER)}>Vertex Shader</button>
+        <button className={classnames({active: this.props.selectedTab === SHOW_FRAGMENT_SHADER})} onClick={()=> this.props.onSwitchShader(SHOW_FRAGMENT_SHADER)}>Fragment Shader</button>
+        <button className={classnames({active: this.props.selectedTab === SHOW_VERTEX_SHADER})} onClick={()=> this.props.onSwitchShader(SHOW_VERTEX_SHADER)}>Vertex Shader</button>
       </div>
     );
   }
