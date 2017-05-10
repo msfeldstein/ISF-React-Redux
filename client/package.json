@@ -7,9 +7,12 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
+    "classnames": "^2.2.5",
+    "codemirror": "^5.25.2",
     "interactive-shader-format": "^2.2.0",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.5.4",
+    "react-codemirror": "^0.3.0",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",

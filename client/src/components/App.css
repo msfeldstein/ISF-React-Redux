@@ -20,9 +20,33 @@ body, html {
   overflow-y: scroll;
 }
 
-.Renderer {
+.MainSection {
   flex-grow: 1;
   height: 100%;
   background: black;
   color: white;
+}
+
+.Editor {
+  height: 50%;
+}
+.Renderer {
+  height: 50%;
+}
+
+.CodeMirror {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.CodeMirror-scroll {
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.CodeMirror-sizer {
+  min-width: auto !important;
 }
