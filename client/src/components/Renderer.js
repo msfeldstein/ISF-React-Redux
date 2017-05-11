@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import ISF from 'interactive-shader-format'
+import * as playbackActions from '../actions/playback'
 
 class Renderer extends Component {
   componentDidMount() {
@@ -18,13 +19,20 @@ class Renderer extends Component {
   
   renderISF() {
     requestAnimationFrame(this.renderISF)
-    if (this.props.sketch && !this.isfRenderer.model.error) {
+    if (this.props.sketch && this.isfRenderer.valid) {
       this.isfRenderer.draw(this.canvas)  
     }
   }
   
   componentWillReceiveProps(nextProps) {
-    this.isfRenderer.loadSource(nextProps.sketch.raw_fragment_source, nextProps.sketch.raw_vertex_source)
+    try {
+      this.isfRenderer.loadSource(nextProps.sketch.raw_fragment_source, nextProps.sketch.raw_vertex_source)  
+    } catch (e) {
+      debugger
+      console.log("Error!!", this.isfRenderer.raw.error)
+    }
+    console.log("ERROR IS ", this.isfRenderer.error)
+    this.props.onShaderCompile(this.isfRenderer.valid, this.isfRenderer.error, this.isfRenderer.errorLine)
   }
   
   render() {
@@ -42,5 +50,11 @@ export default connect(
       sketch: state.playback.currentSketch
     }
   },
-  null
+  (dispatch) => {
+    return {
+      onShaderCompile: (valid, error, lineNumber) => {
+        dispatch(playbackActions.shaderCompiled(valid, error, lineNumber))
+      }
+    }
+  }
 )(Renderer);

@@ -1,17 +1,17 @@
-import {PLAY_SKETCH, NEW_SKETCH, UPDATE_SOURCE} from '../actions/playback'
+import * as playbackActions from '../actions/playback'
 import * as editorActions from '../actions/editor-state'
 import Sketch from '../model/sketch'
-export default (state = {}, action) => {
+export default (state = {valid: false}, action) => {
   switch (action.type) {
-    case PLAY_SKETCH:
+    case playbackActions.PLAY_SKETCH:
       return Object.assign({}, state, {
         currentSketch: action.sketch
       })
-    case NEW_SKETCH:
+    case playbackActions.NEW_SKETCH:
       return Object.assign({}, state, {
         currentSketch: new Sketch()
       })
-    case UPDATE_SOURCE:
+    case playbackActions.UPDATE_SOURCE:
       const sketch = state.currentSketch
       if (action.shaderType === editorActions.SHOW_FRAGMENT_SHADER) {
         sketch.raw_fragment_source = action.src
@@ -20,6 +20,12 @@ export default (state = {}, action) => {
       }
       return Object.assign({}, state, {
         currentSketch: Object.assign({}, sketch)
+      })
+    case playbackActions.SHADER_COMPILED:
+      return Object.assign({}, state, {
+        valid: action.valid,
+        error: action.error,
+        lineNumber: action.lineNumber
       })
     default:
       return state;

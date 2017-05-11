@@ -22,4 +22,12 @@ export const updateSource = (shaderType, src) => {
   }
 }
 
-
+export const SHADER_COMPILED = "SHADER_COMPILED"
+export const shaderCompiled = (valid, error, lineNumber) => {
+  return {
+    type: SHADER_COMPILED,
+    valid,
+    error,
+    lineNumber,
+  }
+}

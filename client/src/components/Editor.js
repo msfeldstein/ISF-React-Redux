@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import 'codemirror/lib/codemirror.css';
+import './Editor.css'
 import '../glsl.mode.js';
 import ReactDOM from 'react-dom';
 import CodeMirror from 'codemirror';
@@ -32,7 +33,12 @@ class Editor extends Component {
   
 	componentDidMount() {
 		var textareaNode = ReactDOM.findDOMNode(this.refs.textarea);
-		this.codeMirror = CodeMirror.fromTextArea(textareaNode, {mode: 'glsl', lineWrapping: true});
+		this.codeMirror = CodeMirror.fromTextArea(textareaNode, {
+			mode: 'glsl',
+			lineWrapping: true,
+			lineNumbers: true,
+			gutters: [ 'CodeMirror-linenumbers', 'errors-gutter' ]
+		});
 		this.codeMirror.on('change', this.codemirrorValueChanged.bind(this));
 		this.codeMirror.on('focus', this.focusChanged.bind(this, true));
 		this.codeMirror.on('blur', this.focusChanged.bind(this, false));
@@ -47,6 +53,8 @@ class Editor extends Component {
 	}
   
 	componentWillReceiveProps(nextProps) {
+		console.log(nextProps)
+		this.codeMirror.clearGutter('errors-gutter');
 		if (this.codeMirror && nextProps.value !== undefined && normalizeLineEndings(this.codeMirror.getValue()) !== normalizeLineEndings(nextProps.value)) {
 			if (this.props.preserveScrollPosition) {
 				var prevScrollPosition = this.codeMirror.getScrollInfo();
@@ -63,6 +71,19 @@ class Editor extends Component {
 				}
 			}
 		}
+		if (nextProps.error) {
+			this.codeMirror.setGutterMarker(nextProps.errorLineNumber - 1, 'errors-gutter', this.createMarker('sup'));
+		}
+	}
+	
+	createMarker(error) {
+		const marker = document.createElement( 'span' );
+		marker.className = 'error-marker';
+		marker.style.color = '#d00';
+		marker.innerHTML = '●';
+		marker.setAttribute( 'data-errors', error );
+		console.log("Marker", marker)
+		return marker;
 	}
   
 	getCodeMirror() {
@@ -129,9 +150,13 @@ const mapStateToProps = (state, props) => {
       src = state.playback.currentSketch.raw_fragment_source
     }
   }
+	console.log("PLAYBACK", state.playback)
   return {
 		selectedTab: state.editor.selectedTab,
-    value: src
+    value: src,
+		valid: state.playback.valid,
+		errorLineNumber: state.playback.lineNumber,
+		error: state.playback.error && state.playback.error.message
   }
 }
 
