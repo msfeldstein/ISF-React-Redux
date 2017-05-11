@@ -17,6 +17,6 @@ export default `/*{
 }*/
 
 void main() {
-	gl_FragColor = vec4(isf_FragNormCoord.x, isf_FragNormCoord.y, 1.0, 1.0);
+		gl_FragColor = vec4(isf_FragNormCoord.x, isf_FragNormCoord.y, abs(sin(TIME)), 1.0);
 }
 `

@@ -28,10 +28,8 @@ class Renderer extends Component {
     try {
       this.isfRenderer.loadSource(nextProps.sketch.raw_fragment_source, nextProps.sketch.raw_vertex_source)  
     } catch (e) {
-      debugger
       console.log("Error!!", this.isfRenderer.raw.error)
     }
-    console.log("ERROR IS ", this.isfRenderer.error)
     this.props.onShaderCompile(this.isfRenderer.valid, this.isfRenderer.error, this.isfRenderer.errorLine)
   }
   
