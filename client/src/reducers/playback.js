@@ -1,7 +1,7 @@
 import * as playbackActions from '../actions/playback'
 import * as editorActions from '../actions/editor-state'
 import Sketch from '../model/sketch'
-export default (state = {valid: false}, action) => {
+export default (state = {model: {}, valid: false}, action) => {
   switch (action.type) {
     case playbackActions.PLAY_SKETCH:
       return Object.assign({}, state, {
@@ -23,6 +23,7 @@ export default (state = {valid: false}, action) => {
       })
     case playbackActions.SHADER_COMPILED:
       return Object.assign({}, state, {
+        model: action.model,
         valid: action.valid,
         error: action.error,
         lineNumber: action.lineNumber

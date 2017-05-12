@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import ISF from 'interactive-shader-format'
 import * as playbackActions from '../actions/playback'
-
+import * as controls from '../actions/controls'
 class Renderer extends Component {
   componentDidMount() {
     let wrapper = ReactDOM.findDOMNode(this.refs.wrapper)
@@ -25,12 +25,20 @@ class Renderer extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    try {
-      this.isfRenderer.loadSource(nextProps.sketch.raw_fragment_source, nextProps.sketch.raw_vertex_source)  
-    } catch (e) {
-      console.log("Error!!", this.isfRenderer.raw.error)
+    console.log("NextProps", nextProps)
+    if (nextProps.sketch !== this.props.sketch) {
+      try {
+        this.isfRenderer.loadSource(nextProps.sketch.raw_fragment_source, nextProps.sketch.raw_vertex_source)  
+      } catch (e) {
+        console.log("Error!!", this.isfRenderer.raw.error)
+      }
+      this.props.onShaderCompile(this.isfRenderer.model, this.isfRenderer.valid, this.isfRenderer.error, this.isfRenderer.errorLine)
     }
-    this.props.onShaderCompile(this.isfRenderer.valid, this.isfRenderer.error, this.isfRenderer.errorLine)
+    if (nextProps.values !== this.props.values) {
+      for (let key in nextProps.values) {
+        this.isfRenderer.setValue(key, nextProps.values[key])
+      }
+    }
   }
   
   render() {
@@ -45,13 +53,16 @@ class Renderer extends Component {
 export default connect(
   (state, props) => {
     return {
-      sketch: state.playback.currentSketch
+      sketch: state.playback.currentSketch,
+      values: state.controls.values
     }
   },
   (dispatch) => {
     return {
-      onShaderCompile: (valid, error, lineNumber) => {
-        dispatch(playbackActions.shaderCompiled(valid, error, lineNumber))
+      onShaderCompile: (model, valid, error, lineNumber) => {
+        const modelObj = Object.assign({}, model)
+        dispatch(playbackActions.shaderCompiled(modelObj, valid, error, lineNumber))
+        dispatch(controls.shaderCompiled(modelObj, valid))
       }
     }
   }
