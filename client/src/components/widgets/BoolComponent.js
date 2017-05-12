@@ -20,7 +20,7 @@ class BoolComponent extends Component {
           defaultChecked={this.props.value}
           onChange={this.handleChange}
           />
-          {this.props.value}
+          {this.props.value ? "On" : "Off"}
       </div>
     )
   }

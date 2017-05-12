@@ -31,7 +31,7 @@ class Point2DComponent extends Component {
     this.ctx.beginPath()
     this.ctx.arc(
       this.props.value[0] * this.canvas.width,
-      this.props.value[1] * this.canvas.height,
+      (1 - this.props.value[1]) * this.canvas.height,
       5, 0, 2 * Math.PI)
     this.ctx.fill()
   }
@@ -53,7 +53,7 @@ class Point2DComponent extends Component {
   }
   
   setValue(x, y) {
-    this.props.setValue(this.props.input.NAME, x, y)
+    this.props.setValue(this.props.input.NAME, x, 1 - y)
   }
   
   handleMouseUp() {
