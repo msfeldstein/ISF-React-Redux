@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
+import BoolComponent from './BoolComponent'
 import FloatComponent from './FloatComponent'
 import Point2DComponent from './Point2DComponent'
 import './Widgets.css'
@@ -12,10 +13,12 @@ class WidgetHost extends Component {
         return <Point2DComponent input={input} />
       case 'float':
         return <FloatComponent input={input} />
+      case 'bool':
+        return <BoolComponent input={input} />
       default:
         return (
           <div>
-            Unknown Type
+            Unknown Type {input.TYPE}
           </div>
         )
     }
