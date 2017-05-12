@@ -9,12 +9,10 @@ class FloatComponent extends Component {
   }
   
   handleChange(e) {
-    console.log("CHANGE", e)
     this.setValue(e.nativeEvent.target.value)
   }
   
   setValue(v) {
-    console.log("SEt value ",v)
     this.props.setValue(this.props.input.NAME, v)
   }
   
@@ -51,5 +49,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)
-(FloatComponent)
+)(FloatComponent)

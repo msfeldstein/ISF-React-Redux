@@ -9,7 +9,6 @@ class Point2DComponent extends Component {
     this.handleMouseDown = this.handleMouseDown.bind(this)
     this.handleMouseMove = this.handleMouseMove.bind(this)
     this.handleMouseUp = this.handleMouseUp.bind(this)
-    console.log(this)
     this.state = {
       mouseDown: false
     }
@@ -17,16 +16,31 @@ class Point2DComponent extends Component {
   componentDidMount() {
     this.canvas = ReactDOM.findDOMNode(this.refs.canvas);
     this.ctx = this.canvas.getContext('2d')
+    this.redraw()
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value[0] === this.props.value[0] && nextProps.value[1] === this.props.value[1]) return
+    this.redraw()
+  }
+  
+  redraw() {
+    this.ctx.fillStyle = 'black'
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
     this.ctx.fillStyle = 'white'
-    this.ctx.arc(50, 50, 5, 0, 2 * Math.PI)
+    this.ctx.beginPath()
+    this.ctx.arc(
+      this.props.value[0] * this.canvas.width,
+      this.props.value[1] * this.canvas.height,
+      5, 0, 2 * Math.PI)
     this.ctx.fill()
   }
   
-  handleMouseDown() {
+  handleMouseDown(e) {
     this.setState({
       mouseDown: true
     })
+    e.preventDefault()
   }
   handleMouseMove(e) {
     if (this.state.mouseDown) {
@@ -39,12 +53,6 @@ class Point2DComponent extends Component {
   }
   
   setValue(x, y) {
-    this.ctx.fillStyle = 'black'
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-    this.ctx.fillStyle = 'white'
-    this.ctx.beginPath()
-    this.ctx.arc(x * this.canvas.width, y * this.canvas.height, 5, 0, 2 * Math.PI)
-    this.ctx.fill()
     this.props.setValue(this.props.input.NAME, x, y)
   }
   
@@ -70,7 +78,9 @@ class Point2DComponent extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  return {}
+  return {
+    value: state.controls.values[props.input.NAME]
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -83,5 +93,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)
-(Point2DComponent)
+)(Point2DComponent)

@@ -53,7 +53,6 @@ class Editor extends Component {
 	}
   
 	componentWillReceiveProps(nextProps) {
-		console.log(nextProps)
 		this.codeMirror.clearGutter('errors-gutter');
 		if (this.codeMirror && nextProps.value !== undefined && normalizeLineEndings(this.codeMirror.getValue()) !== normalizeLineEndings(nextProps.value)) {
 			if (this.props.preserveScrollPosition) {
@@ -82,7 +81,6 @@ class Editor extends Component {
 		marker.style.color = '#d00';
 		marker.innerHTML = '●';
 		marker.setAttribute( 'data-errors', error );
-		console.log("Marker", marker)
 		return marker;
 	}
   
@@ -150,7 +148,6 @@ const mapStateToProps = (state, props) => {
       src = state.playback.currentSketch.raw_fragment_source
     }
   }
-	console.log("PLAYBACK", state.playback)
   return {
 		selectedTab: state.editor.selectedTab,
     value: src,

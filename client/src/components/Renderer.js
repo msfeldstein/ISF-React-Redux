@@ -25,7 +25,6 @@ class Renderer extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    console.log("NextProps", nextProps)
     if (nextProps.sketch !== this.props.sketch) {
       try {
         this.isfRenderer.loadSource(nextProps.sketch.raw_fragment_source, nextProps.sketch.raw_vertex_source)  
