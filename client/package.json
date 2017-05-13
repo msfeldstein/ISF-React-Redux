@@ -11,7 +11,7 @@
     "babel-polyfill": "^6.23.0",
     "classnames": "^2.2.5",
     "codemirror": "^5.25.2",
-    "interactive-shader-format": "^2.6.0",
+    "interactive-shader-format": "^2.6.1",
     "isomorphic-fetch": "^2.2.1",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",

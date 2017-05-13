@@ -21,9 +21,9 @@ export default `/*{
 			"MAX" : 		1.0
 		},
 		{
-			"NAME": 		"fractnoise",
+			"NAME": 		"dostuff",
 			"TYPE": 		"bool",
-			"DEFAULT": 		"FALSE"
+			"DEFAULT": 		0
 		}
 	]
 }*/
@@ -33,10 +33,12 @@ void main() {
 			isf_FragNormCoord.xy,
 			pointInput
 		), 2.0);
+  		float b = abs(sin(TIME));
+  		if (dostuff) b = abs(sin(TIME + isf_FragNormCoord.x * 100.0));
 		gl_FragColor = vec4(
 			r,
 			green,
-			abs(sin(TIME)),
+			b,
 			1.0);
 }
 `
