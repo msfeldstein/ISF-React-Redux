@@ -1,3 +1,7 @@
 .errors-gutter {
   width: 0.8em;
 }
+
+.line-error {
+  background: #FFAFAF;
+}

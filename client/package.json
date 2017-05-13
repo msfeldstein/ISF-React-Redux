@@ -6,7 +6,7 @@
     "gh-pages": "^1.0.0",
     "react-scripts": "0.9.5"
   },
-  "homepage": "https://msfeldstein.github.io/ISF-react-redux",
+  "homepage": "https://msfeldstein.github.io/ISF-React-Redux/",
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "classnames": "^2.2.5",

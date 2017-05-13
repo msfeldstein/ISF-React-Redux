@@ -70,8 +70,13 @@ class Editor extends Component {
 				}
 			}
 		}
+		if (this.existingLineClass) {
+			this.codeMirror.removeLineClass(this.existingLineClass, 'wrap')
+			this.existingLineClass = null;
+		}
 		if (nextProps.error) {
 			this.codeMirror.setGutterMarker(nextProps.errorLineNumber - 1, 'errors-gutter', this.createMarker('sup'));
+			this.existingLineClass = this.codeMirror.addLineClass(nextProps.errorLineNumber - 1, 'wrap', 'line-error')
 		}
 	}
 	
