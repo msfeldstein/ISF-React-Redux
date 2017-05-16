@@ -4,11 +4,22 @@ import * as apiActions from '../actions/api'
 import * as playbackActions from '../actions/playback'
 import SketchBinItem from './SketchBinItem'
 import WidgetHost from './widgets/WidgetHost'
+import './Loader.css'
+
 class Sidebar extends Component {
   constructor(props) {
     super(props)
     this.state = {sketches: []}
   }
+  
+  loadingSpinner() {
+    if (this.props.isFetching) {
+      return <div className='loader'>Loading</div>
+    } else {
+      return null
+    }
+  }
+  
   render() {
     return (
       <div className="Sidebar">
@@ -16,6 +27,7 @@ class Sidebar extends Component {
         <button onClick={this.props.onClickLoad}>Load Popular</button>
         <div>
           <WidgetHost />
+          {this.loadingSpinner()}
           {this.props.sketches.map(sketch => 
             <SketchBinItem onClick={this.props.onClickThumb} key={sketch.id} sketch={sketch} />
           )}
@@ -26,8 +38,10 @@ class Sidebar extends Component {
 }
 
 const mapStateToProps = (state, props) => {
+  console.log9
   return {
-    sketches: state.api.sketches || []
+    sketches: state.api.sketches || [],
+    isFetching: state.api.isFetching
   }
 }
 
